@@ -150,7 +150,7 @@ class ProxmoxResource:
                     httplib.responses.get(
                         resp.status_code, ANYEVENT_HTTP_STATUS_CODES.get(resp.status_code)
                     ),
-                    resp.reason,
+                    f"{resp.reason} {resp.text}" if resp.text else resp.reason,
                     errors=(self._store["serializer"].loads_errors(resp)),
                     exit_code=resp.exit_code if hasattr(resp, "exit_code") else None,
                 )
